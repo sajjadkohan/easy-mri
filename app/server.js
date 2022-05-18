@@ -2,6 +2,8 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const { AllRoutes } = require("./router/router");
+const createErrors = require("http-errors");
+
 module.exports = class Application {
     #app = express();
     #DB_URI;
@@ -37,6 +39,19 @@ module.exports = class Application {
             if(!error) return console.log("success connect to MONGODB");
             return console.log("failed connect to MONGODB");
         })
+
+        mongoose.connection.on("connected" , ()=> {
+            console.log("mongoose connected to DATA BASE");
+        })
+
+        mongoose.connection.on("dissconnected" , ()=> {
+            console.log("mongoose DISSconnected to DATA BASE");
+        })
+
+        process.on("SIGINT" , async()=> {
+            await mongoose.connection.close();
+            process.exit(0)
+        })
     }
 
     createRoutes(){
@@ -48,18 +63,19 @@ module.exports = class Application {
 
     errorHandling(){
         this.#app.use((req, res , next)=> {
-            return res.status(404).json({
-                statusCode : 404,
-                message : "صفحه مورد نظر وجود ندارد"
-            })
+            next(createErrors.NotFound(".صفحه مورد نظر وجود ندارد."));
+            
         })
 
         this.#app.use((error , req , res , next)=> {
-            const statusCode = error.status || 500;
-            const message = error.message || "internal server";
+            const internalServerError = createErrors.InternalServerError()
+            const statusCode = error.status || internalServerError.status
+            const message = error.message || internalServerError.message
             res.status(statusCode).json({
-                statusCode,
-                message
+                errors : {
+                    statusCode,
+                    message
+                }
             })
         })
 

@@ -8,4 +8,12 @@ module.exports = class Controller {
     test(){
         return "test"
     }
+
+    register(req, res, next){
+        try {
+            
+        } catch (error) {
+            next(error)
+        }
+    }
 }

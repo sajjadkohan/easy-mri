@@ -1,0 +1,33 @@
+### get all users
+GET http://localhost:5000/user/list
+
+
+### delete user by fistname
+DELETE http://localhost:5000/user/delete/ALIREZA
+
+
+
+### register user
+POST http://localhost:5000/user/register
+Content-Type: application/json
+
+{
+    "first_name" : "sajjad",
+    "last_name" : "kohan",
+    "nationalCode" : "5140066309",
+    "password" : "1231234",
+    "confirm_password" : "1231234",
+    "phoneNumber" : "09367109094"
+}
+
+
+### login user
+POST http://localhost:5000/user/login
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYXRpb25hbENvZGUiOiI1MTQwMDY2MzAyIiwiaWF0IjoxNjUyNzg3MDM5LCJleHAiOjE2NTcxMDcwMzl9.snYQuUgbjbT_eMIQZXjF9b0ekv2xWi9O-KIhv3llNQw
+
+{
+    "nationalCode" : "5140066302",
+    "password" : "1231234"
+}
+
