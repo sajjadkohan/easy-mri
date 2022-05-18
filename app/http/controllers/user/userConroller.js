@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const { userModel } = require("../../../models/users");
 const { hashedString, createJwt } = require("../../../modules/functions");
 const bcrypt = require("bcrypt");
+const { $_match } = require("@hapi/joi/lib/base");
 
 class UserController {
     constructor(){
@@ -40,21 +41,32 @@ class UserController {
     async login(req, res , next){
         try {
             
-            const {nationalCode , password} = req.body;
-            // console.log( "این هدر است"+req.headers);
-            const user = await userModel.findOne({nationalCode} , {password :1 , first_name : 1 , nationalCode : 1 , token : 1});
-            if(!user) throw {status:401 , message : "کد ملی یافت نشد"}
+        const {nationalCode , password} = req.body;
+        // console.log( "این هدر است"+req.headers);
+        const user = await userModel.findOne({nationalCode});
+        if(!user) throw {status:401 , message : "کد ملی یافت نشد"}
 
-            const compaireData = bcrypt.compareSync(password , user.password);
-            if(!compaireData) throw {status:401 , message : "رمز عبور اشتباه می باشد"}
+        const compaireData = bcrypt.compareSync(password , user.password);
+        if(!compaireData) throw {status:401 , message : "رمز عبور اشتباه می باشد"}
 
-            let token = createJwt({nationalCode})
-            user.token = token;
-            await user.save();
-            
-            return res.status(201).json({
-                user
-            })
+        let token = createJwt({nationalCode})
+        user.token = token;
+        await user.save();
+
+        const newUser = await userModel.aggregate([
+            {
+                $match : {nationalCode}
+            },
+            {
+                $project : {password : 0 ,__v : 0}
+            }
+        ])
+        if(!newUser) throw {status:401 , message : "کد ملی یافت نشد"}
+
+        
+        return res.status(201).json({
+            newUser
+        })
 
         } catch (error) {
             next(error)

@@ -11,7 +11,7 @@ async function checkLogin (req,res,next){
     // console.log("توکنی که در هدر وارد شده",token);
 
     const resultToken = verifyJwtToken(token);
-    console.log(resultToken);
+    // console.log(resultToken);
     if(!resultToken) {
         console.log("توکن منقضی شد");
       throw {status : 401 , message : "توکن منقضی شده 2"};  
