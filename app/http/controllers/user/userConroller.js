@@ -73,6 +73,34 @@ class UserController {
         }
     }
 
+    async updateUser(req, res , next){
+        try {
+            
+        const data = {...req.body}
+        const nationalCodeUser = req.params.nationalCode
+
+        // console.log(">>>>",nationalCodeUser);
+        const user = await userModel.findOne({"nationalCode" : nationalCodeUser})
+        if(!user) throw {status:401,message : "کاربر با این کد ملی یافت نشد که بخواد اپدیتم بشه"}
+
+        //aggregate یک ارابه را به ما برمیگرداند.
+
+        const userUpdated = await userModel.updateOne({nationalCode : user.nationalCode},{$set : data})
+        if(userUpdated.modifiedCount == 0 ) throw {status : 401 , message : "کاربر اپدیت نشد"}
+
+        return res.status(200).json({
+            message : "اپدیت شد"
+        })
+
+        
+        // console.log( "این هدر است"+req.headers);
+        
+
+        } catch (error) {
+            next(error)
+        }
+    }
+
     async getAllUsers (req, res , next) {
         try {
             

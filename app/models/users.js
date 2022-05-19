@@ -20,7 +20,7 @@ const Schema = new mongoose.Schema({
     email : {type : String},
     password : {type : String},
     mri : {type : [mri] , default : []},
-    address : {type : String},
+    address : {type : String ,default: ""},
     token : {type : String , default : ""}
 } , {
     timestamps : true

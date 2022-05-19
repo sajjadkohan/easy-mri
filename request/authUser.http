@@ -3,7 +3,7 @@ GET http://localhost:5000/user/list
 
 
 ### delete user by fistname
-DELETE http://localhost:5000/user/delete/ALIREZA
+DELETE http://localhost:5000/user/delete/ali
 
 
 
@@ -12,9 +12,9 @@ POST http://localhost:5000/user/register
 Content-Type: application/json
 
 {
-    "first_name" : "sajjad",
-    "last_name" : "kohan",
-    "nationalCode" : "5140066309",
+    "first_name" : "ali",
+    "last_name" : "delbar",
+    "nationalCode" : "5140066400",
     "password" : "1231234",
     "confirm_password" : "1231234",
     "phoneNumber" : "09367109094"
@@ -24,10 +24,21 @@ Content-Type: application/json
 ### login user
 POST http://localhost:5000/user/login
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYXRpb25hbENvZGUiOiI1MTQwMDY2MzAyIiwiaWF0IjoxNjUyODU2NjcwLCJleHAiOjE2NTcxNzY2NzB9.sBDZziqhP_r_HZMnwklJDaXDmiQHYvyX1TSECm5OLh8
 
 {
-    "nationalCode" : "5140066300",
+    "nationalCode" : "5140066377",
     "password" : "1231234"
 }
 
+### update user information
+POST http://localhost:5000/user/update/5140066400
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYXRpb25hbENvZGUiOiI1MTQwMDY2Mzc3IiwiaWF0IjoxNjUyODc2Mzg5LCJleHAiOjE2NTcxOTYzODl9.GtDiwl0FmyVjmAKCj75A2b8-3pnYUhvUxQrixDI4E2w
+Content-Type: application/json
+
+{
+    "dateOfBirth" : "21.01.1379",
+    "father_name" : "reza", 
+    "age" : 33,
+    "email" : "ali.44@hh.ce",
+    "address" : " "
+}

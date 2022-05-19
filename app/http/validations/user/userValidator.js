@@ -93,7 +93,35 @@ function loginValidator () {
     ]
 }
 
+function updateUserValidator () {
+
+    return [
+        body("father_name").notEmpty().withMessage("فیلد نمیتواند خالی باشد").custom((value)=> {
+            const valueRegex = /^[a-z]{3,}$/gim;
+            if(!valueRegex.test(value)) throw "مقدار وارد شده صحیح نیست"
+
+            return true
+        }),
+        body("dateOfBirth").notEmpty().withMessage("فیلد نمیتواند خالی باشد").custom((value)=> {
+            const valueRegex = /^([0-9]{2})([\.\/]{1})?([0-9]{2})([\.\/]{1})?([0-9]{4})$/;
+            if(!valueRegex.test(value)) throw "مقدار وارد شده صحیح نیست"
+
+            return true
+        }),
+        body("age").notEmpty().withMessage("فیلد نمیتواند خالی باشد").custom((value)=> {
+            const valueRegex = /^[0-9]{1,3}$/;
+            if(!valueRegex.test(value)) throw "مقدار وارد شده صحیح نیست"
+
+            return true
+        }),
+        body("email").notEmpty().isEmail().withMessage("ایمیل وارد شده صحیح نیست"),
+        body("address").notEmpty().withMessage("لطفا ادرس را وارد کنید")
+    ]
+
+}
+
 module.exports = {
     registerValidator,
-    loginValidator
+    loginValidator,
+    updateUserValidator
 }

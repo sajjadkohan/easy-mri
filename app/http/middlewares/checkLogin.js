@@ -11,7 +11,7 @@ async function checkLogin (req,res,next){
     // console.log("توکنی که در هدر وارد شده",token);
 
     const resultToken = verifyJwtToken(token);
-    // console.log(resultToken);
+    console.log("RESULT TOKEN",resultToken);
     if(!resultToken) {
         console.log("توکن منقضی شد");
       throw {status : 401 , message : "توکن منقضی شده 2"};  
@@ -19,7 +19,7 @@ async function checkLogin (req,res,next){
 
     const {nationalCode} = resultToken;
     const user = await userModel.findOne({nationalCode} , {password : 0});
-    if(!user) throw{status : 401 , message : "کاربر یافت نشد"}
+    if(!user) throw{status : 401 , message : "کاربر یافت نشد  ... "}
     req.user = user;
 
     next()
