@@ -1,0 +1,3 @@
+### get all MRIs user
+GET http://localhost:5000/user/allmri
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYXRpb25hbENvZGUiOiI1MTQwMDY2NDAwIiwiaWF0IjoxNjUzMjk4ODc4LCJleHAiOjE2NTc2MTg4Nzh9.79PC2Esz64qUNClLDZcN1Z8l5ifueiwspWmguFrxq_k

@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
 const mri = new mongoose.Schema({
+        
     fileMri : {type : String , default : ""},
     reportMri : {type : String , default : ""},
-    dateSave : {type : String , default : "" , required : true},
+    dateSave : {type : String , default : ""}
 
 })
 
@@ -19,9 +20,12 @@ const Schema = new mongoose.Schema({
     roles : {type : [String] , default : ["USER"]},
     email : {type : String},
     password : {type : String},
-    mri : {type : [mri] , default : []},
     address : {type : String ,default: ""},
-    token : {type : String , default : ""}
+    token : {type : String , default : ""},
+    otp : {type:Object,default: {
+        code : 0,
+        expiresIn: 0
+    }}
 } , {
     timestamps : true
 })

@@ -120,8 +120,20 @@ function updateUserValidator () {
 
 }
 
+function mriFileValidator () {
+    return [
+
+        body("filee").custom((req,{ctx})=> {
+            console.log("REQ >",req.file);
+            console.log("CTX >",ctx.file);
+        })
+
+    ]
+}
+
 module.exports = {
     registerValidator,
     loginValidator,
-    updateUserValidator
+    updateUserValidator,
+    mriFileValidator
 }

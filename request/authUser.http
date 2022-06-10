@@ -6,7 +6,6 @@ GET http://localhost:5000/user/list
 DELETE http://localhost:5000/user/delete/ali
 
 
-
 ### register user
 POST http://localhost:5000/user/register
 Content-Type: application/json
@@ -26,19 +25,19 @@ POST http://localhost:5000/user/login
 Content-Type: application/json
 
 {
-    "nationalCode" : "5140066377",
+    "nationalCode" : "5140066400",
     "password" : "1231234"
 }
 
 ### update user information
-POST http://localhost:5000/user/update/5140066400
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYXRpb25hbENvZGUiOiI1MTQwMDY2Mzc3IiwiaWF0IjoxNjUyODc2Mzg5LCJleHAiOjE2NTcxOTYzODl9.GtDiwl0FmyVjmAKCj75A2b8-3pnYUhvUxQrixDI4E2w
+POST http://localhost:5000/user/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYXRpb25hbENvZGUiOiI1MTQxMjM0NTY3IiwiaWF0IjoxNjUzMDI3MjcxLCJleHAiOjE2NTczNDcyNzF9.1xqmpwJTfTjas-IyACwy2WFN_zMANAq7Hp_SLlP8uiU
 Content-Type: application/json
 
 {
-    "dateOfBirth" : "21.01.1379",
-    "father_name" : "reza", 
-    "age" : 33,
-    "email" : "ali.44@hh.ce",
-    "address" : " "
+    "dateOfBirth" : "21.01.1387",
+    "father_name" : "davood", 
+    "age" : 14,
+    "email" : "omid.44@نخاشد.com",
+    "address" : "KATE GONBAD"
 }

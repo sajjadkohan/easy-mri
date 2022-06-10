@@ -3,6 +3,8 @@ const path = require("path");
 const mongoose = require("mongoose");
 const { AllRoutes } = require("./router/router");
 const createErrors = require("http-errors");
+const swaggerUiExpress = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 
 module.exports = class Application {
     #app = express();
@@ -25,6 +27,21 @@ module.exports = class Application {
         this.#app.use(express.json());
         this.#app.use(express.urlencoded({extended : true}));
         this.#app.use(express.static(path.join(__dirname , ".." , "public")));
+        this.#app.use("/doc-api",swaggerUiExpress.serve , swaggerUiExpress.setup(swaggerJsDoc({
+            swaggerDefinition : {
+                info : {
+                    title : "EASY MRI",
+                    version : "1.0.0",
+                    description : "backend EASY MRI and create API for EASY MRI"
+                },
+                servers : [
+                    {
+                        url : "http://localhost:5000"
+                    }
+                ]
+            },
+            apis : ["./app/router/**/*.js"]
+        })))
     }
 
     createServer(){
